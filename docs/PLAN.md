@@ -66,7 +66,9 @@
 | S7 eval | `metrics.json` | 표의 모든 열 + n_box, n_frame, n_clip, git_commit | 스키마 검사 |
 | S8 viz | `overlay/`, `video/`, `plots/` | – | – |
 
-- `run_id = <YYYYmmdd-HHMM>_<git short hash>`. 실행할 때 `config.resolved.yaml`과 `git.json`(commit, branch, dirty 여부)을 함께 저장한다.
+- `run_id = <YYMMDD>_<실험 이름>` (예: `261013_smoke`, `261014_dev-baseline`). 실험 이름은 config의 `run.name`에서 가져온다.
+  - 같은 날 같은 이름으로 다시 돌리면 덮어쓰지 않고 `_2`, `_3`을 붙인다 (`261013_smoke_2`).
+- 실행할 때 `config.resolved.yaml`과 `git.json`(commit, branch, dirty 여부, 실행 시각)을 함께 저장한다. 코드 버전(git hash)은 폴더 이름이 아니라 `git.json`에서 확인한다.
 - dev 결과는 레포 루트의 `metrics_history.jsonl`에 한 줄씩 추가한다(git으로 추적).
 
 ## 4. Jev 입력: 구조화된 증거 (S4)
@@ -153,7 +155,7 @@ jev-gate/
 
 - `main`: 검증 루프를 통과한 코드만 둔다.
 - `feat/<단계>`: 코드 작업 (예: `feat/detect`, `feat/jev-judge`).
-- `exp/<YYYYmmdd>-<slug>`: config만 바꾸는 실험. PR 본문에 지표 표를 넣는다.
+- `exp/<YYMMDD>-<실험 이름>`: config만 바꾸는 실험. PR 본문에 지표 표를 넣는다.
 - 원격(GitHub)은 팀 공유 시점에 따로 만든다 (아직 로컬 전용).
 
 ## 10. 마일스톤
