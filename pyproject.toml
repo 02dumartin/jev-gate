@@ -1,0 +1,46 @@
+[project]
+name = "jev-gate"
+version = "0.1.0"
+description = "Box-level verification of Grounding DINO candidates: detector score vs VLM vs Jev vs Jev-gated VLM"
+requires-python = ">=3.11,<3.12"
+dependencies = [
+    "torch==2.8.0",
+    "torchvision==0.23.0",
+    "transformers==4.57.1",
+    "accelerate>=1.10",
+    "qwen-vl-utils>=0.0.11",
+    "pycocotools>=2.0.8",
+    "numpy>=2.0",
+    "pillow>=11.0",
+    "opencv-python-headless>=4.10",
+    "matplotlib>=3.9",
+    "pyyaml>=6.0",
+    "httpx[http2]>=0.27",
+    "python-dotenv>=1.0",
+    "tqdm>=4.66",
+]
+
+[dependency-groups]
+dev = ["pytest>=8.0", "ruff>=0.6"]
+
+[tool.uv]
+package = false
+
+[tool.uv.sources]
+torch = { index = "pytorch-cu128" }
+torchvision = { index = "pytorch-cu128" }
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true
+
+[tool.ruff]
+line-length = 110
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

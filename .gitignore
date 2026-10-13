@@ -1,0 +1,11 @@
+# secrets
+.env
+# environment
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+# data and outputs (data lives outside git; runs are reproduced from config + commit)
+data/
+runs/
